@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- MAIN -->
+<div id="main">
+  <div class="wrapper clearfix">
+    <!-- posts list -->
+    <div id="posts-list">
+      <h3 class="page-heading"><span>Лента новостей</span></h3>
+      {% for art in articles %}
+      <article class="format-standard">
+        <div class="entry-date">
+          <div class="number">{{ art.article_date|date:"d" }}</div>
+          <div class="year">{{ art.article_date|date:"M, Y" }}</div>
+        </div>
+        <div class="feature-image"> <a href="{{ art.article_image.url }}" data-rel="prettyPhoto"><img src={{ art.article_image.url }} alt=""></a> </div>
+        <a href="/article/{{ art.id }}"><p class="flex-blog">{{art.article_title }}</p></a>
+        <!--<div class="excerpt">{{ art.article_text|truncatewords:10 }}</div>
+        -->
+        <div class="meta">
+          <div class="categories">
+              В категории: {% for cat in art.article_category.all %} <a href="/category/{{ cat.category_name }}">{{ cat }}</a>
+            {% endfor %}
+          </div>
+          <a href="/article/{{ art.id }}/addlike"><div class="likes">{{ art.article_likes }}</div></a>
+          <a href="/article/{{ art.id }}"><div class="read">Читать полностью &#8594;</div></a>
+        </div>
+      </article>
+      {% endfor %}
+      <!-- page-navigation -->
+    <div class="page-navigation clearfix">
+       {% if articles.has_previous %}
+          <div class="nav-previous"> <a href="/blog/{{ articles.previous_page_number }}/">Новые работы &#8594;</a> </div>
+       {% endif %}
+       {% if articles.has_next %}
+          <div class="nav-next"> <a href="/blog/{{ articles.next_page_number }}/">&#8592; Работы ранее </a> </div>
+       {% endif %}
+    </div>
+    </div>
+    <!-- ENDS posts list -->
+    <!-- sidebar -->
+    <aside id="sidebar">
+      <ul>
+          <li class="block">
+              <h4>-Категории-</h4>
+              <ul>
+              {% for cat in category %}
+                <li class="cat-item"><a href="/category/{{ cat.category_name }}">&#8727; {{ cat.category_title }}</a></li>
+              {% endfor %}
+              </ul>
+          </li>
+          <li class="block">
+          <h4>?ARCHIVES</h4>
+          <ul>
+            <li class="cat-item"><a href="#">?</a></li>
+            <li class="cat-item"><a href="#">?</a></li>
+            <li class="cat-item"><a href="#">?</a></li>
+          </ul>
+        </li>
+      </ul>
+      <em id="corner"></em> </aside>
+    <!-- ENDS sidebar -->
+  </div>
+</div>
+<!-- ENDS MAIN -->
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- MAIN -->
+<div id="main">
+  <div class="wrapper">
+    <!-- slider holder -->
+    <div id="slider-holder" class="clearfix">
+      <!-- slider -->
+      <div class="flexslider home-slider">
+        <ul class="slides">
+         {% for article in article_likes %}
+          <li> <a href="/article/{{ article.id }}"> <img src={{ article.article_image.url }} alt=""></a>
+            <p class="flex-caption">{{article.article_title }}</p><p class="flex-caption-right">Лайков: {{article.article_likes}}</p>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <!-- ENDS slider -->
+      <div class="home-slider-clearfix "></div>
+      <!-- Headline -->
+      <div id="headline">
+        <h3>Добро пожаловать!</h3>
+        <br>
+        <p>Данный сайт предназначен наглядно показать, какими могут быть замечательными вещи, сделанные своими руками.</p>
+        <div class="right">
+            <p>Ваша, Светлана.</p>
+            <br>
+            <br>
+            <ul id="social-bar">
+              <li><a href="http://vk.com/feirbyf" target="_blank" title="Посетить ВКонтакте" class="poshytip"><img src="/static/img/social/vk.png" alt=""></a></li>
+              <li><a href="https://twitter.com/#!/svetlana_work" target="_blank" title="Подписаться на twitter" class="poshytip"><img src="/static/img/social/twitter.png" alt=""></a></li>
+            </ul>
+      </div>
+        <em id="corner"></em> </div>
+      <!-- ENDS headline -->
+    </div>
+    <!-- ENDS slider holder -->
+    <!-- home-block -->
+    <div class="home-block">
+      <h4 class="home-block-heading"><span>ЛУЧШИЕ РАБОТЫ</span></h4>
+      <div class="one-third-thumbs clearfix">
+        {% for article in article_likes %}
+        <figure>
+          <figcaption> <strong>{{article.article_title }}</strong> <em>{{ article.article_date|date:"d M, Y" }}  Лайков {{ article.article_likes }}</em><a href="/article/{{ article.id }}" class="opener"></a> </figcaption>
+          <a href="/article/{{ article.id }}" class="thumb"><img src={{ article.article_image.url }} alt=""></a> </figure>
+         {% endfor %}
+      </div>
+    </div>
+    <!-- ENDS home-block -->
+    <!-- home-block -->
+    <div class="home-block">
+      <h4 class="home-block-heading"><span>ПОСЛЕДНИИ РАБОТЫ</span></h4>
+      <div class="one-fourth-thumbs clearfix">
+        {% for article in article_last %}
+        <figure>
+          <figcaption> <strong>{{article.article_title }}</strong> <em>{{ article.article_date|date:"d M, Y" }} Лайков {{ article.article_likes }}</em> <a href="/article/{{ article.id }}" class="opener"></a> </figcaption>
+          <a href="/article/{{ article.id }}" class="thumb"><img src={{ article.article_image.url }} alt=""></a> </figure>
+        {% endfor %}
+        <a href=/portfolio class="more-link right">Другие работы &#8594;</a> </div>
+      </div>
+    </div>
+    <!-- ENDS home-block -->
+  </div>
+</div>
+<!-- ENDS MAIN -->
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- MAIN -->
+<div id="main">
+
+  <div class="wrapper clearfix">
+    <h3 class="page-heading"><span>Работы в категории -  {{ category }}</span></h3>
+    <!-- thumbs -->
+    <div class="portfolio-thumbs clearfix">
+    {% for art in articles %}
+         <figure>
+            <figcaption> <strong>{{ art.article_title }}</strong> <em>{{ art.article_date|date:"d M, Y" }} Лайков {{ art.article_likes }} <a href="/article/{{ art.id }}" class="opener"></a> </figcaption>
+            <a href="/article/{{ art.id }}" class="thumb"><img src={{ art.article_image.url }} alt=""></a> </figure>
+            {% endfor %}
+    </div>
+    <!-- ends thumbs-->
+    <!-- pager -->
+ {% if art_count > 0 %}
+    <ul class="pager">
+    {% for page in articles.paginator.page_range %}
+        {% if page == articles.number %}
+            <li class="active"><a href="/category/{{ category.category_name }}/{{ page }}/">{{ page }}</a></li>
+        {% else %}
+            <li><a href="/category/{{ category.category_name }}/{{ page }}/">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <div class="clearfix"></div>
+  {% endif %}
+</div>
+</div>
+<!-- ENDS MAIN -->
+{% endblock %}

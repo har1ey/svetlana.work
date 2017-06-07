@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- MAIN -->
+<div id="main">
+  <div class="wrapper clearfix">
+    <h3 class="page-heading"><span>Работы по категориям</span></h3>
+    <!-- thumbs -->
+    <div class="portfolio-thumbs clearfix">
+       {% for cat in category %}
+         <figure>                                            <!-- Описание категории?? -->
+            <figcaption> <strong>{{ cat.category_title }}</strong> <span></span> <em>Кол-во работ: {{ cat.article_set.count }}</em> <a href="/category/{{ cat.category_name }}" class="opener"></a> </figcaption>
+            <a href="/category/{{ cat.category_name }}" class="thumb"><img src={{ cat.category_image.url }} alt=""></a> </figure>
+            {% endfor %}
+    </div>
+    <!-- ends thumbs-->
+    <!-- pager -->
+  {% if category_count > 0 %}
+    <ul class="pager">
+    {% for page in category.paginator.page_range %}
+        {% if page == category.number %}
+            <li class="active"><a href="/portfolio/{{ page }}/">{{ page }}</a></li>
+        {% else %}
+            <li><a href="/portfolio/{{ page }}/">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <div class="clearfix"></div>
+  {% endif %}
+  <h3 class="page-heading"><span>Все работы в хронологическом порядке можно посмотреть в <a href="/blog">Блоге</a></span></h3>
+  </div>
+    <!-- ENDS pager -->
+  </div>
+</div>
+<!-- ENDS MAIN -->
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block main %}
+<!-- MAIN -->
+<div id="main">
+  <div class="wrapper clearfix">
+    <!-- page content -->
+    <div id="page-content" class="clearfix">
+      <!-- floated content -->
+      <div class="floated-content">
+        <h3 class="page-heading"><span>Что-то пошло не так ;(</span></h3>
+        <a href="/" title="Погладь меня и все наладится ^_^"> <img src="static/img/enot404.jpg"> </a>
+
+      </div>
+      <!-- ends floated content -->
+      <!-- sidebar -->
+     <aside id="sidebar">
+      <ul>
+          <li class="block">
+              <h4>-Категории-</h4>
+              <ul>
+              {% for cat in category %}
+                <li class="cat-item"><a href="/category/{{ cat.category_name }}">&#8727; {{ cat.category_title }}</a></li>
+              {% endfor %}
+              </ul>
+          </li>
+          <li class="block">
+          <h4>?ARCHIVES</h4>
+          <ul>
+            <li class="cat-item"><a href="#">?</a></li>
+            <li class="cat-item"><a href="#">?</a></li>
+            <li class="cat-item"><a href="#">?</a></li>
+          </ul>
+        </li>
+      </ul>
+      <em id="corner"></em> </aside>
+      <!-- ENDS sidebar -->
+    </div>
+    <!--  page content-->
+  </div>
+</div>
+<!-- ENDS MAIN -->
+{% endblock %}

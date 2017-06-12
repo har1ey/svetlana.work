@@ -5,6 +5,7 @@ from ckeditor.widgets import CKEditorWidget
 from nocaptcha_recaptcha.fields import NoReCaptchaField
 from nocaptcha_recaptcha.widgets import InvisibleReCaptchaWidget
 
+
 class ArticleForm(forms.ModelForm):
 
     content = forms.CharField(widget=CKEditorWidget())
@@ -16,6 +17,15 @@ class ArticleForm(forms.ModelForm):
 
 class OrderForm(forms.ModelForm):
     product = forms.ModelChoiceField(queryset=Article.objects.all(), widget=forms.HiddenInput())
+
     class Meta:
         model = Order
         fields = ['product', 'name', 'phone']
+
+    captcha = NoReCaptchaField(
+        gtag_attrs={
+            'callback': 'onSubmit',
+            'bind': 'submit-btn'
+        },
+        widget=InvisibleReCaptchaWidget
+    )
